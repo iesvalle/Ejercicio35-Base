@@ -1,4 +1,4 @@
-BASE PARA EL BUSCAMINAS: (Nombre alumno)
+BASE PARA EL BUSCAMINAS: (Rubén Prieto García)
 =========================
 
 En este programa se encuentra la base para el ejercicio 35 de Desarrollo de intefaces.
