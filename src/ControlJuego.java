@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -47,6 +48,7 @@ public class ControlJuego {
 		ArrayList<Integer> posicionesMinas = new ArrayList<>();
 
 		int contador = 0;
+		// creo el tablero con todas las casillas a 0
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				tablero[i][j] = 0;
@@ -78,12 +80,36 @@ public class ControlJuego {
 
 		} while (posicionesMinas.size() != 20);
 
-		// pinto las minas
+		// lo ordeno para pintarlo de manera m�s facil
+		Collections.sort(posicionesMinas);
+		// pinto las minas en las posiciones correspondientes
+		for (int i = 0; i < posicionesMinas.size(); i++) {
+			int columna, fila;
+			int posicionMina = posicionesMinas.get(i);// guardamos el valor
+														// aleatorio
+			// lo primero que haremos sera sacar la posicion de la fila
+			// el 00...09 se corresponde con la comlumna 0, y asi
+			// sucesimavemente
 
-		
+			fila = posicionMina / 10; // divido entre 10 para coger la fila
+			columna = posicionMina % 10;// cogo el resto para la columna
+
+			tablero[fila][columna] = -1;
+
+		}
 
 		// Calculo para todas las posiciones que no tienen minas, cuántas minas
 		// hay alrededor.
+
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero.length; j++) {
+				if (tablero[i][j] != -1) {
+
+					tablero[i][j] = calculoMinasAdjuntas(i, j);
+
+				}
+			}
+		}
 
 		// Pongo la puntuación a cero:
 
@@ -107,10 +133,26 @@ public class ControlJuego {
 	 *            posición horizontalmente de la casilla a rellenar
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 */
-	// private int calculoMinasAdjuntas(int i, int j){
-	//
-	// }
-	//
+	private int calculoMinasAdjuntas(int fila, int columna) {
+		int minasAlrededor = 0;
+
+		// recorremos las filas y columnas que hay alrededor
+
+		for (int i = fila - 1; i < fila + 1; i++) {
+			for (int j = columna - 1; j < columna + 1; j++) {
+
+				if (i >= 0 && j >= 0 && i < 10 && j < 10) {
+					if (tablero[i][j] == -1) {
+						minasAlrededor++;
+					}
+				}
+
+			}
+		}
+
+		return minasAlrededor;
+	}
+
 	/**
 	 * Método que nos permite
 	 * 
