@@ -140,7 +140,14 @@ public class VentanaPrincipal {
 	 * Método que inicializa todos los lísteners que necesita inicialmente el programa
 	 */
 	public void inicializarListeners(){
-		//TODO
+	
+		for (int i = 0; i < botonesJuego.length; i++) {
+			for (int j = 0; j < botonesJuego.length; j++) {
+			//	botonesJuego[i][j].addActionListener(new ActionBoton(juego, i, j);
+			}
+		}
+		
+		
 	}
 	
 	
@@ -157,7 +164,18 @@ public class VentanaPrincipal {
 	 * @param j: posición horizontal de la celda.
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
-		//TODO
+			//guardo el numero de minas q hay alrededor de la casilla pulsada
+			int minasAlrededor=juego.getMinasAlrededor(i, j); 
+			//cambio el boton por un Jlabel
+			panelesJuego[i][j].removeAll();//borramos el boton
+			//lo cambiamos por un JLlabel
+			JLabel pantallaMinasAlrededor=new JLabel(String.valueOf(minasAlrededor));
+			pantallaMinasAlrededor.setForeground(correspondenciaColores[minasAlrededor]);
+			pantallaMinasAlrededor.setHorizontalAlignment(SwingConstants.CENTER);
+			panelesJuego[i][j].add(pantallaMinasAlrededor);
+			
+			refrescarPantalla();
+			
 	}
 	
 	
@@ -167,7 +185,11 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		//TODO
+		if (juego.esFinJuego()) {
+			for (int i = 0; i < botonesJuego.length; i++) {
+				
+			}
+		}
 	}
 
 	/**

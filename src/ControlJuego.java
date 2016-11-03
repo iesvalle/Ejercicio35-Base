@@ -103,7 +103,7 @@ public class ControlJuego {
 
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero.length; j++) {
-				if (tablero[i][j] != -1) {
+				if (tablero[i][j] != MINA) {
 
 					tablero[i][j] = calculoMinasAdjuntas(i, j);
 
@@ -112,6 +112,8 @@ public class ControlJuego {
 		}
 
 		// Pongo la puntuación a cero:
+
+		puntuacion = 0;
 
 	}
 
@@ -138,11 +140,11 @@ public class ControlJuego {
 
 		// recorremos las filas y columnas que hay alrededor
 
-		for (int i = fila - 1; i < fila + 1; i++) {
-			for (int j = columna - 1; j < columna + 1; j++) {
+		for (int i = fila - 1; i <= fila + 1; i++) {
+			for (int j = columna - 1; j <= columna + 1; j++) {
 
 				if (i >= 0 && j >= 0 && i < 10 && j < 10) {
-					if (tablero[i][j] == -1) {
+					if (tablero[i][j] == MINA) {
 						minasAlrededor++;
 					}
 				}
@@ -164,10 +166,17 @@ public class ControlJuego {
 	 *            posición horizontalmente de la casilla a abrir
 	 * @return : Verdadero si no ha explotado una mina. Falso en caso contrario.
 	 */
-	// public boolean abrirCasilla(int i, int j){
-	//
-	// }
-	//
+	public boolean abrirCasilla(int i, int j) {
+		boolean abrirCasilla;
+
+		if (tablero[i][j] == MINA) {
+			abrirCasilla = false;
+		} else {
+			abrirCasilla = true;
+		}
+
+		return abrirCasilla;
+	}
 
 	/**
 	 * Método que checkea si se ha terminado el juego porque se han abierto
@@ -176,9 +185,19 @@ public class ControlJuego {
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son
 	 *         minas.
 	 **/
-	// public boolean esFinJuego(){
-	// }
-	//
+	public boolean esFinJuego() {
+		boolean finJuego;
+		//comprobamos cuando la puntuacion es 80, ya que es el total que podemos sacar
+		int puntuacionMaxima=LADO_TABLERO*LADO_TABLERO-MINAS_INICIALES; 
+
+		//si la puntuacion del jugador es la maxima hemos acabado la partida
+		if (puntuacionMaxima==this.puntuacion) {
+			finJuego=true;
+		}else{
+			finJuego=false;
+		}
+		return finJuego;
+	}
 
 	/**
 	 * Método que pinta por pantalla toda la información del tablero, se
@@ -208,14 +227,16 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la
 	 *         celda
 	 */
-	// public int getMinasAlrededor(int i, int j) {
-	// }
+	 public int getMinasAlrededor(int i, int j) {
+		 return tablero[i][j];
+	 }
 	/**
 	 * Método que devuelve la puntuación actual
 	 * 
 	 * @return Un entero con la puntuación actual
 	 */
-	// public int getPuntuacion() {
-	// }
-	//
+	 public int getPuntuacion() {
+		 return puntuacion;
+	 }
+	
 }
