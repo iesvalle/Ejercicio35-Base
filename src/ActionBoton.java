@@ -27,10 +27,15 @@ public class ActionBoton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		if (this.ventana.getJuego().abrirCasilla(fila, columna)) {
+			this.ventana.mostrarNumMinasAlrededor(fila, columna);
+			this.ventana.actualizarPuntuacion();
+		}else{
+			
+			this.ventana.mostrarFinJuego(this.ventana.getJuego().esFinJuego()); //comprobamos si se acaba el juego por explosion de una mina o por ganar
+
+		}
 		
-		
-		
-															
 	}
 
 }

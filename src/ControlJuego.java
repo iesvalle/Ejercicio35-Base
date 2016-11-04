@@ -172,6 +172,7 @@ public class ControlJuego {
 		if (tablero[i][j] == MINA) {
 			abrirCasilla = false;
 		} else {
+			puntuacion++;
 			abrirCasilla = true;
 		}
 
